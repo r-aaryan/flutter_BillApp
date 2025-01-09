@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:bp_app/screens/payment_summary_screen.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';//added
 class BillPaymentScreen extends StatefulWidget {
   final String accountId;
   final String currency;
@@ -49,6 +49,7 @@ class _BillPaymentScreenState extends State<BillPaymentScreen> {
             debitAccount: debitAccount,
             billAmount: amount,
             currency: currency,
+            userId: FirebaseAuth.instance.currentUser!.uid,//added
           ),
         ),
       );

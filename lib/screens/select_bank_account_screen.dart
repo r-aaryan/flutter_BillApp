@@ -6,12 +6,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SelectBankAccountScreen extends StatefulWidget {
   final Map<String, dynamic> billDetails;
- 
 
   SelectBankAccountScreen({
     required this.billDetails,
-   
-    });
+  });
 
   @override
   _SelectBankAccountScreenState createState() =>
@@ -50,7 +48,6 @@ class _SelectBankAccountScreenState extends State<SelectBankAccountScreen> {
               accountId: account['accountId'],
               currency: account['currency'],
               billDetails: widget.billDetails,
-          
             ),
           ),
         );
@@ -88,8 +85,11 @@ class _SelectBankAccountScreenState extends State<SelectBankAccountScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('Currency: ${account['currency']}'),
+                    // Text(
+                    //     'Balance: \$${double.parse(account['balance']).toStringAsFixed(2)}'),
                     Text(
-                        'Balance: \$${double.parse(account['balance']).toStringAsFixed(2)}'),
+                      'Balance: \$${double.parse(account['balance'].toString()).toStringAsFixed(2)}',
+                    ),
                   ],
                 ),
                 onChanged: (value) {
