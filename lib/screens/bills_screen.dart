@@ -1,11 +1,10 @@
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:bp_app/services/bill_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
 import 'select_bank_account_screen.dart';
 import 'package:bp_app/screens/add_bill_screen.dart';
+import 'package:bp_app/models/selected_bill.dart';
 
 class BillsScreen extends StatefulWidget {
   final String providerId;
@@ -66,6 +65,12 @@ class _BillsScreenState extends State<BillsScreen> {
 
               final formattedDate = DateFormat('yyyy-MM-dd').format(dueDate);
 
+              // Determine if the bill is paid
+              final isPaid =bill['paymentStatus'] == 'Paid';
+
+
+
+
               return Card(
                 margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                 child: ListTile(
@@ -87,7 +92,13 @@ class _BillsScreenState extends State<BillsScreen> {
                         ? Colors.green
                         : Colors.orange,
                   ),
-                  onTap: () {
+                  onTap: isPaid
+                   ? null // Disable onTap for Paid bills
+                    :() {
+                    
+                    SelectedBill.documentId = bill['documentId']; // 'id' is from getBillsByProviderAndUser
+                    print('Selected Bill ID: ${SelectedBill.documentId}');
+
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -100,6 +111,7 @@ class _BillsScreenState extends State<BillsScreen> {
                   },
                 ),
               );
+              
             },
           );
         },

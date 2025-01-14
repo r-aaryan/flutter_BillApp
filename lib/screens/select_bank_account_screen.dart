@@ -1,8 +1,11 @@
+
+//selectBankAccountScreen PERSISTENT
+
 import 'package:flutter/material.dart';
 import 'package:bp_app/services/bank_account_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:bp_app/screens/bill_payment_screen.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:bp_app/models/selected_bill.dart'; // Import the SelectedBankAccount class
 
 class SelectBankAccountScreen extends StatefulWidget {
   final Map<String, dynamic> billDetails;
@@ -29,29 +32,45 @@ class _SelectBankAccountScreenState extends State<SelectBankAccountScreen> {
     _accountsFuture = _bankAccountService.getBankAccountsByUserId(userId);
   }
 
-  void _confirmSelection() {
+  void _confirmSelection() async {
     if (_selectedAccountId == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Please select a bank account.')),
       );
     } else {
-      final selectedAccount =
-          _accountsFuture.then((accounts) => accounts.firstWhere(
-                (account) => account['accountId'] == _selectedAccountId,
-              ));
+      // Find the selected account details
+      try {
+        final accounts = await _accountsFuture;
+        final selectedAccount = accounts.firstWhere(
+          (account) => account['accountId'] == _selectedAccountId,
+        );
 
-      selectedAccount.then((account) {
+        // Save the selected account details in the singleton
+        SelectedBill.accountNumber = _selectedAccountId;
+        SelectedBill.balance = selectedAccount['balance'].toString();
+        SelectedBill.currency = selectedAccount['currency'];
+
+        print('Selected Bank Account: ${SelectedBill.accountNumber}');
+        print('Balance: ${SelectedBill.balance}');
+        print('Currency: ${SelectedBill.currency}');
+
+        // Navigate to the next screen
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => BillPaymentScreen(
-              accountId: account['accountId'],
-              currency: account['currency'],
+              accountId: selectedAccount['accountId'],
+              currency: selectedAccount['currency'],
               billDetails: widget.billDetails,
             ),
           ),
         );
-      });
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error selecting account. Please try again.')),
+        );
+        print('Error: $e');
+      }
     }
   }
 
@@ -85,8 +104,6 @@ class _SelectBankAccountScreenState extends State<SelectBankAccountScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('Currency: ${account['currency']}'),
-                    // Text(
-                    //     'Balance: \$${double.parse(account['balance']).toStringAsFixed(2)}'),
                     Text(
                       'Balance: \$${double.parse(account['balance'].toString()).toStringAsFixed(2)}',
                     ),

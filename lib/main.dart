@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'signup_screen.dart';
 import 'screens/categories_screen.dart';
 
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  
   await Firebase.initializeApp(); // Initialize Firebase
   runApp(MyApp());
 }
@@ -28,3 +30,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'payment_summary_screen.dart';
+
 import 'payment_gateway.dart';
 class OTPScreen extends StatefulWidget {
   final String phoneNumber;
