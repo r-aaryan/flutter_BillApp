@@ -79,7 +79,7 @@ class _BillsScreenState extends State<BillsScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                          'Amount Due: \$${bill['amountDue'].toStringAsFixed(2)}'),
+                          'Amount Due: \INR ${bill['amountDue'].toStringAsFixed(2)}'), //CC
                       Text('Due Date: $formattedDate'),
                       Text('Status: ${bill['paymentStatus']}'),
                     ],

@@ -49,7 +49,7 @@ class _PaymentSummaryScreenState extends State<PaymentSummaryScreen> {
 
     // Simulated fee calculation
     setState(() {
-      _applicableFees = widget.billAmount * 0.02; // Example: 2% fee
+      _applicableFees = widget.billAmount * 0.00; // Example: 2% fee
       _isLoading = false;
     });
   }
@@ -79,7 +79,7 @@ class _PaymentSummaryScreenState extends State<PaymentSummaryScreen> {
 
     // String userPhoneNumber = '+91${phoneNumber}';
     String userPhoneNumber = '+911234567890';
-    String currency = 'USD'; // Fetch from user data
+    String currency = 'INR'; // Fetch from user data
     double totalAmount = widget.billAmount; // Fetch from user data
     Navigator.push(
       context,
@@ -152,70 +152,3 @@ class _PaymentSummaryScreenState extends State<PaymentSummaryScreen> {
 
 
 
-//   Future<void> _sendOtpToEmail(String email) async {
-//     try {
-//       await FirebaseAuth.instance.sendSignInLinkToEmail(
-//         email: email,
-//         actionCodeSettings: ActionCodeSettings(
-//           url: 'https://gibmesmth.page.link',
-//           handleCodeInApp: true,
-//           androidPackageName: 'com.example.bp_app',
-//           androidInstallApp: true,
-//           // iOSBundleId: 'com.example.yourapp',
-//         ),
-//       );
-//       ScaffoldMessenger.of(context).showSnackBar(
-//         SnackBar(content: Text("OTP sent to $email")),
-//       );
-//     } catch (e) {
-//       throw Exception("Failed to send OTP: ${e.toString()}");
-//     }
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(title: Text('Payment Summary')),
-//       body: _isLoading
-//           ? Center(child: CircularProgressIndicator())
-//           : Padding(
-//               padding: const EdgeInsets.all(16.0),
-//               child: Column(
-//                 crossAxisAlignment: CrossAxisAlignment.start,
-//                 children: [
-//                   Text(
-//                     'Service Provider: ${widget.serviceProvider}',
-//                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-//                   ),
-//                   SizedBox(height: 8),
-//                   Text(
-//                     'Debit Account: ${widget.debitAccount}',
-//                     style: TextStyle(fontSize: 16),
-//                   ),
-//                   SizedBox(height: 8),
-//                   Text(
-//                     'Bill Amount: ${widget.currency} ${widget.billAmount.toStringAsFixed(2)}',
-//                     style: TextStyle(fontSize: 16),
-//                   ),
-//                   SizedBox(height: 8),
-//                   Text(
-//                     'Applicable Fees: ${widget.currency} ${_applicableFees.toStringAsFixed(2)}',
-//                     style: TextStyle(fontSize: 16),
-//                   ),
-//                   SizedBox(height: 16),
-//                   Divider(),
-//                   Text(
-//                     'Total Amount: ${widget.currency} ${(widget.billAmount + _applicableFees).toStringAsFixed(2)}',
-//                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-//                   ),
-//                   SizedBox(height: 20),
-//                   ElevatedButton(
-//                     onPressed: _makePayment,
-//                     child: Text('Make Payment'),
-//                   ),
-//                 ],
-//               ),
-//             ),
-//     );
-//   }
-// }

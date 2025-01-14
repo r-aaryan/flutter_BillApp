@@ -105,7 +105,7 @@ class _SelectBankAccountScreenState extends State<SelectBankAccountScreen> {
                   children: [
                     Text('Currency: ${account['currency']}'),
                     Text(
-                      'Balance: \$${double.parse(account['balance'].toString()).toStringAsFixed(2)}',
+                      'Balance: \INR ${double.parse(account['balance'].toString()).toStringAsFixed(2)}', //CC
                     ),
                   ],
                 ),

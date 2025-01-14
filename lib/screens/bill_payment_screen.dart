@@ -38,7 +38,7 @@ class _BillPaymentScreenState extends State<BillPaymentScreen> {
           widget.billDetails['providerName'] ?? "Bill Info";
       final debitAccount =
           widget.accountId.isNotEmpty ? widget.accountId : "Unknown Account";
-      final currency = widget.currency.isNotEmpty ? widget.currency : "USD";
+      final currency = widget.currency.isNotEmpty ? widget.currency : "INR";  //CC
 
       Navigator.push(
         context,
