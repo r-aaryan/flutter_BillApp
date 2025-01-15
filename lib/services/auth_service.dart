@@ -5,8 +5,8 @@ class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   // Sign up with email and password
-  Future<User?> signUp(
-      String email, String password, String name, String phoneNumber, String dob) async {
+  Future<User?> signUp(String email, String password, String name,
+      String phoneNumber, String dob) async {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
@@ -14,7 +14,10 @@ class AuthService {
 
       // Add user details to Firestore
       if (user != null) {
-        await FirebaseFirestore.instance.collection('customers').doc(user.uid).set({
+        await FirebaseFirestore.instance
+            .collection('customers')
+            .doc(user.uid)
+            .set({
           'name': name,
           'email': email,
           'phoneNumber': phoneNumber,
@@ -44,12 +47,25 @@ class AuthService {
   // Fetch user details from Firestore
   Future<Map<String, dynamic>?> getUserDetails(String uid) async {
     try {
-      DocumentSnapshot userDoc =
-          await FirebaseFirestore.instance.collection('customers').doc(uid).get();
+      DocumentSnapshot userDoc = await FirebaseFirestore.instance
+          .collection('customers')
+          .doc(uid)
+          .get();
       return userDoc.data() as Map<String, dynamic>;
     } catch (e) {
       print("Error fetching user details: $e");
       return null;
+    }
+  }
+
+  // Send password reset email
+  Future<void> sendPasswordResetEmail(String email) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+      print("Password reset email sent to $email");
+    } catch (e) {
+      print("Error sending password reset email: $e");
+      throw e; // Re-throw the error for UI handling
     }
   }
 
