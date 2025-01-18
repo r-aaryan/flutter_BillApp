@@ -1,3 +1,4 @@
+// login_screen.dart
 import 'package:flutter/material.dart';
 import 'services/auth_service.dart';
 
@@ -28,7 +29,6 @@ class _LoginScreenState extends State<LoginScreen> {
       if (user != null) {
         var userDetails = await _authService.getUserDetails(user.uid);
         if (userDetails != null) {
-          // Navigate to the categories screen
           Navigator.pushReplacementNamed(context, '/categories');
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -46,13 +46,11 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-<<<<<<< HEAD
       body: Stack(
         children: [
-          // Background Image
           Positioned.fill(
             child: Image.asset(
-              'assets/bg.jpg', // Replace with your image path
+              'assets/bg.jpg',
               fit: BoxFit.cover,
             ),
           ),
@@ -66,8 +64,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset(
-                        'assets/rl.png', // Replace with your app logo image path
-                        width: 40, // Adjust width as needed
+                        'assets/rl.png',
+                        width: 40,
                       ),
                       SizedBox(width: 10),
                       Text(
@@ -156,47 +154,6 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           ),
         ],
-=======
-      appBar: AppBar(title: Text("Login")),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              TextFormField(
-                controller: _emailController,
-                decoration: InputDecoration(labelText: "Email"),
-                keyboardType: TextInputType.emailAddress,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your email';
-                  } else if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-                    return 'Please enter a valid email';
-                  }
-                  return null;
-                },
-              ),
-              TextFormField(
-                controller: _passwordController,
-                decoration: InputDecoration(labelText: "Password"),
-                obscureText: true,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your password';
-                  }
-                  return null;
-                },
-              ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: _login,
-                child: Text("Login"),
-              ),
-            ],
-          ),
-        ),
->>>>>>> origin/frontend
       ),
     );
   }

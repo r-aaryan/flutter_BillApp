@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import '../models/bank_account.dart';
-
 class PaymentScreen extends StatelessWidget {
   final BankAccount account;
 
   PaymentScreen({required this.account});
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +21,7 @@ class PaymentScreen extends StatelessWidget {
             SizedBox(height: 20),
             Text('Account: ${account.accountNumber}'),
             Text('Currency: ${account.currency}'),
-            Text('Balance: \$${account.balance.toStringAsFixed(2)}'),
+            Text('Balance: \INR${account.balance.toStringAsFixed(2)}'), //CC
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {

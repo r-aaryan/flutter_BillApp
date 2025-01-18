@@ -12,11 +12,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
   User? _user;
   Map<String, dynamic>? _userData;
-<<<<<<< HEAD
-
-=======
   
->>>>>>> origin/frontend
   // Controllers to capture user input
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
@@ -88,31 +84,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
       body: _userData == null
           ? Center(child: CircularProgressIndicator()) // Loading state
           : Padding(
-<<<<<<< HEAD
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              child: Column(
-                children: [
-                  CircleAvatar(
-                    radius: 60,
-                    backgroundImage: AssetImage('assets/du.jpg'), // Default user image
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    'User Profile',
-                    style: TextStyle(
-                      fontFamily: 'Poppins',
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 16),
-                ],
+            CircleAvatar(
+              radius: 60,
+              backgroundImage: AssetImage('assets/du.jpg'), // Default user image
+            ),
+            SizedBox(height: 10),
+            Text(
+              'User Profile',
+              style: TextStyle(
+                fontFamily: 'Poppins',
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
               ),
             ),
+            SizedBox(height: 16),
             TextField(
               controller: _nameController,
               decoration: InputDecoration(labelText: 'Name'),
@@ -142,35 +131,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ],
         ),
       ),
-=======
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  TextField(
-                    controller: _nameController,
-                    decoration: InputDecoration(labelText: 'Name'),
-                  ),
-                  SizedBox(height: 10),
-                  TextField(
-                    controller: _phoneController,
-                    decoration: InputDecoration(labelText: 'Phone Number'),
-                    keyboardType: TextInputType.phone,
-                  ),
-                  SizedBox(height: 10),
-                  TextField(
-                    controller: _dobController,
-                    decoration: InputDecoration(labelText: 'Date of Birth'),
-                  ),
-                  SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: _updateUserData,
-                    child: Text('Save Changes'),
-                  ),
-                ],
-              ),
-            ),
->>>>>>> origin/frontend
     );
   }
 }

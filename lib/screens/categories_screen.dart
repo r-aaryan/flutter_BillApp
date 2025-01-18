@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 // import 'package:flutter/material.dart';
 // import '../services/bill_service.dart';
 // import 'providers_screen.dart';
@@ -185,14 +183,12 @@
 //     );
 //   }
 
-  
+
 
 
 
 // }
 //------------2---2-2-2-----
-
->>>>>>> origin/frontend
 import 'package:flutter/material.dart';
 import '../services/bill_service.dart';
 import 'providers_screen.dart';
@@ -231,11 +227,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   Widget build(BuildContext context) {
     return BaseScreen(
       title: 'Bill Categories',
-<<<<<<< HEAD
       titleBackgroundColor: Color(0xFF0B2A5E), // Set the background color to dark blue
-      // iconTheme: IconThemeData(
-      //   color: Colors.white, // Set icon color to white
-      // ),
       child: DefaultTextStyle(
         style: TextStyle(
           fontFamily: 'Poppins',
@@ -334,54 +326,6 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
             );
           },
         ),
-=======
-      child: FutureBuilder<List<Map<String, dynamic>>>(
-        future: _categories,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return const Center(child: Text('Error loading categories.'));
-          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('No categories found.'));
-          }
-
-          final categories = snapshot.data!;
-          return ListView.builder(
-            itemCount: categories.length,
-            itemBuilder: (context, index) {
-              final category = categories[index];
-              String iconName = category['icon'] ?? '';
-              IconData iconData = _getIconFromName(iconName);
-
-              String categoryId = category['id'] ?? '';
-              String categoryName = category['name'] ?? 'Unnamed Category';
-
-              return ListTile(
-                leading: Icon(iconData),
-                title: Text(categoryName),
-                onTap: () {
-                  if (categoryId.isNotEmpty) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ProvidersScreen(
-                          categoryId: categoryId,
-                          categoryName: categoryName,
-                        ),
-                      ),
-                    );
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Category ID is missing')),
-                    );
-                  }
-                },
-              );
-            },
-          );
-        },
->>>>>>> origin/frontend
       ),
     );
   }

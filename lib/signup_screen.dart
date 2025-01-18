@@ -1,5 +1,5 @@
-<<<<<<< HEAD
-=======
+// <<<<<<< HEAD
+// =======
 // import 'package:firebase_auth/firebase_auth.dart';
 // import 'package:flutter/material.dart';
 
@@ -189,7 +189,6 @@
 // }
 //----------22222222222-----------------
 
->>>>>>> origin/frontend
 import 'package:flutter/material.dart';
 import 'package:bp_app/services/auth_service.dart';
 import 'package:intl/intl.dart';
@@ -203,14 +202,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final AuthService _authService = AuthService();
   final _formKey = GlobalKey<FormState>();
 
-  // Controllers to capture user input
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   String? _dob;
 
-  // Show date picker for selecting DOB
   Future<void> _pickDate(BuildContext context) async {
     DateTime? selectedDate = await showDatePicker(
       context: context,
@@ -232,13 +229,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       String password = _passwordController.text;
       String phone = _phoneController.text.trim();
 
-      // Call AuthService to sign up the user
-<<<<<<< HEAD
-      var user = await _authService.signUp(
-          email, password, name, phone, _dob ?? '');
-=======
       var user = await _authService.signUp(email, password, name, phone, _dob ?? '');
->>>>>>> origin/frontend
       if (user != null) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Signup successful! Please login.')),
@@ -255,20 +246,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-<<<<<<< HEAD
       body: Stack(
         children: [
-          // Background Image
           Positioned.fill(
             child: Image.asset(
-              'assets/bg.jpg', // Replace with your image path
+              'assets/bg.jpg',
               fit: BoxFit.cover,
             ),
           ),
-          // Content wrapped in a container with full height
           SingleChildScrollView(
             child: Container(
-              height: MediaQuery.of(context).size.height, // Full height of the screen
+              height: MediaQuery.of(context).size.height,
               child: Column(
                 children: [
                   SizedBox(height: 50),
@@ -276,8 +264,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset(
-                        'assets/rl.png', // Replace with your app logo image path
-                        width: 50, // Adjust width as needed
+                        'assets/rl.png',
+                        width: 50,
                       ),
                       SizedBox(width: 10),
                       Text(
@@ -348,8 +336,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             TextFormField(
                               controller: _passwordController,
-                              decoration: InputDecoration(
-                                  labelText: 'Password'),
+                              decoration: InputDecoration(labelText: 'Password'),
                               style: TextStyle(fontFamily: 'Poppins'),
                               obscureText: true,
                               validator: (value) =>
@@ -359,8 +346,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                             TextFormField(
                               controller: _phoneController,
-                              decoration: InputDecoration(
-                                  labelText: 'Phone Number'),
+                              decoration: InputDecoration(labelText: 'Phone Number'),
                               style: TextStyle(fontFamily: 'Poppins'),
                               keyboardType: TextInputType.phone,
                               validator: (value) =>
@@ -406,63 +392,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
           ),
         ],
-=======
-      appBar: AppBar(title: Text('Sign Up')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: ListView(
-            children: [
-              TextFormField(
-                controller: _nameController,
-                decoration: InputDecoration(labelText: 'Name'),
-                validator: (value) =>
-                    value == null || value.isEmpty ? 'Name is required' : null,
-              ),
-              TextFormField(
-                controller: _emailController,
-                decoration: InputDecoration(labelText: 'Email'),
-                keyboardType: TextInputType.emailAddress,
-                validator: (value) => value == null || !value.contains('@')
-                    ? 'Enter a valid email'
-                    : null,
-              ),
-              TextFormField(
-                controller: _passwordController,
-                decoration: InputDecoration(labelText: 'Password'),
-                obscureText: true,
-                validator: (value) => value == null || value.length < 6
-                    ? 'Password must be at least 6 characters'
-                    : null,
-              ),
-              TextFormField(
-                controller: _phoneController,
-                decoration: InputDecoration(labelText: 'Phone Number'),
-                keyboardType: TextInputType.phone,
-                validator: (value) =>
-                    value == null || value.isEmpty ? 'Phone number is required' : null,
-              ),
-              ListTile(
-                title: Text(_dob != null ? 'DOB: $_dob' : 'Select Date of Birth'),
-                trailing: Icon(Icons.calendar_today),
-                onTap: () => _pickDate(context),
-              ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: _submit,
-                child: Text('Sign Up'),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.pushReplacementNamed(context, '/login');
-                },
-                child: Text('Already have an account? Login'),
-              ),
-            ],
-          ),
-        ),
->>>>>>> origin/frontend
       ),
     );
   }

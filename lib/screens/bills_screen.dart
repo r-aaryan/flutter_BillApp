@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/frontend
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:bp_app/services/bill_service.dart';
@@ -39,7 +35,6 @@ class _BillsScreenState extends State<BillsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-<<<<<<< HEAD
         backgroundColor: Color(0xFF0B2A5E), // Dark blue background
         iconTheme: IconThemeData(
           color: Colors.white, // Set icon color to white
@@ -130,75 +125,6 @@ class _BillsScreenState extends State<BillsScreen> {
             );
           },
         ),
-=======
-        title: Text('Bills for ${widget.providerName}'),
-      ),
-      body: FutureBuilder<List<Map<String, dynamic>>>(
-        future: _billsFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error loading bills.'));
-          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return Center(child: Text('No bills found.'));
-          }
-
-          final bills = snapshot.data!;
-
-          return ListView.builder(
-            itemCount: bills.length,
-            itemBuilder: (context, index) {
-              final bill = bills[index];
-
-              // Convert dueDate to DateTime if it's a string
-              DateTime dueDate;
-              if (bill['dueDate'] is String) {
-                dueDate = DateFormat('yyyy-MM-dd').parse(bill['dueDate']);
-              } else {
-                dueDate = bill['dueDate'];
-              }
-
-              final formattedDate = DateFormat('yyyy-MM-dd').format(dueDate);
-
-              return Card(
-                margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                child: ListTile(
-                  title: Text('Account: ${bill['accountNumber']}'),
-                  subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                          'Amount Due: \$${bill['amountDue'].toStringAsFixed(2)}'),
-                      Text('Due Date: $formattedDate'),
-                      Text('Status: ${bill['paymentStatus']}'),
-                    ],
-                  ),
-                  trailing: Icon(
-                    bill['paymentStatus'] == 'Paid'
-                        ? Icons.check_circle
-                        : Icons.pending,
-                    color: bill['paymentStatus'] == 'Paid'
-                        ? Colors.green
-                        : Colors.orange,
-                  ),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => SelectBankAccountScreen(
-                        
-                          billDetails: bill,
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              );
-            },
-          );
-        },
->>>>>>> origin/frontend
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -220,18 +146,11 @@ class _BillsScreenState extends State<BillsScreen> {
             });
           });
         },
-<<<<<<< HEAD
         backgroundColor: Colors.blue[900], // Match FAB with AppBar color
         foregroundColor: Colors.white, // Set the FAB icon color to white
         child: Icon(Icons.add),
         tooltip: 'Add Bill',
       ),
-
-=======
-        child: Icon(Icons.add),
-        tooltip: 'Add Bill',
-      ),
->>>>>>> origin/frontend
     );
   }
 }

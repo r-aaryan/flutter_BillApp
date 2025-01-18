@@ -17,35 +17,22 @@ class AppDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           UserAccountsDrawerHeader(
-<<<<<<< HEAD
-            accountName: Text(_auth.currentUser?.displayName ?? 'UserName'),
-=======
             accountName: Text(_auth.currentUser?.displayName ?? 'User Name'),
->>>>>>> origin/frontend
             accountEmail: Text(_auth.currentUser?.email ?? 'user@example.com'),
             currentAccountPicture: CircleAvatar(
               backgroundColor: Colors.white,
               child: Text(
                 (_auth.currentUser?.displayName != null &&
-<<<<<<< HEAD
                     _auth.currentUser!.displayName!.isNotEmpty)
-=======
-                        _auth.currentUser!.displayName!.isNotEmpty)
->>>>>>> origin/frontend
                     ? _auth.currentUser!.displayName![0].toUpperCase()
                     : 'U',
                 style: TextStyle(fontSize: 24, color: Colors.blue),
               ),
             ),
-<<<<<<< HEAD
             decoration: BoxDecoration(
               color: Color(0xFF0B2A5E), // Dark blue color
             ),
           ),
-
-=======
-          ),
->>>>>>> origin/frontend
           ListTile(
             leading: Icon(Icons.person),
             title: Text('Profile'),
