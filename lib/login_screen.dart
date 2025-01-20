@@ -43,6 +43,27 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
+  void _forgotPassword() async {
+    String email = _emailController.text.trim();
+    if (email.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Please enter your email to reset password.')),
+      );
+      return;
+    }
+
+    try {
+      await _authService.sendPasswordResetEmail(email);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Password reset email sent! Check your inbox.')),
+      );
+    } catch (error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error: Unable to send reset email.')),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -128,7 +149,18 @@ class _LoginScreenState extends State<LoginScreen> {
                             obscureText: true,
                             style: TextStyle(fontFamily: 'Poppins'),
                           ),
-                          SizedBox(height: 20),
+                          SizedBox(height: 10),
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: TextButton(
+                              onPressed: _forgotPassword,
+                              child: Text(
+                                "Forgot Password?",
+                                style: TextStyle(fontFamily: 'Poppins'),
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 10),
                           ElevatedButton(
                             onPressed: _login,
                             child: Text(
@@ -138,7 +170,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           TextButton(
                             onPressed: () {
-                              Navigator.pushReplacementNamed(context, '/signup');
+                              Navigator.pushReplacementNamed(
+                                  context, '/signup');
                             },
                             child: Text(
                               'Not an existing user?',
