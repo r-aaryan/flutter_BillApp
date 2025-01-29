@@ -84,6 +84,8 @@ class _BillsScreenState extends State<BillsScreen> {
                 }
 
                 final formattedDate = DateFormat('yyyy-MM-dd').format(dueDate);
+                // Determine if the bill is paid
+                final isPaid =bill['paymentStatus'] == 'Paid';
 
                 return Card(
                   margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
@@ -109,7 +111,10 @@ class _BillsScreenState extends State<BillsScreen> {
                           ? Colors.green
                           : Colors.orange,
                     ),
-                    onTap: () {
+                    onTap: isPaid? null: () {
+                    SelectedBill.documentId = bill['documentId']; // 'id' is from getBillsByProviderAndUser
+                    print('Selected Bill ID: ${SelectedBill.documentId}');
+                      
                       Navigator.push(
                         context,
                         MaterialPageRoute(
